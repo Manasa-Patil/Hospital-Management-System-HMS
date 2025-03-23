@@ -8,7 +8,7 @@ const Sidebar = () => {
   return (
     <div className={`bg-gray-700 text-white ${isOpen ? "w-64" : "w-32"} h-screen transition-all duration-300 flex flex-col`}>
       <div className="flex justify-between items-center p-4">
-        <h2 className={`text-xl font-bold ${!isOpen && "hidden"}`}>Dashboard</h2>
+        <h2 className={`text-xl font-bold ${!isOpen && "hidden"}`}>Doctor Dashboard</h2>
         <button onClick={() => setIsOpen(!isOpen)} className="text-white">
           {isOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
         </button>
