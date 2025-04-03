@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import DoctorDashBoard from "./Doctor-DashBoard";
-import AdminDashBoard from "./Admin_DashBoard"
+import App from "./App";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-      <AdminDashBoard />
+    <App/>
   </React.StrictMode>
 );

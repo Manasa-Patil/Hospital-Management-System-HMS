@@ -1,5 +1,5 @@
 import React from 'react'
-import "../PagesRouter/Dashboard.css";
+import "./patient/dashboard.css";
 
 
 export default function PHeader() {

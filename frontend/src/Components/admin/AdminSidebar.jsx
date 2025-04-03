@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 
-const Sidebar = () => {
+const AdminSidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -15,17 +15,17 @@ const Sidebar = () => {
       </div>
       <ul className="mt-4">
         {[
-          {path:"/", name:"Overview"},
-            { path: "/communication-tools", name: "Communication Tools" },
-          { path: "/doctor-management", name: "Doctor Management" },
-          { path: "/staff-management", name: "Staff Management" },
-          { path: "/training-certification", name: "Training & Certification" },
-          { path: "/payroll-compensation", name: "Payroll & Compensation" },
-          {path: "/document-management", name: "Document Management"},
-          {path: "/leave-management", name: "Leave Management"  },
-          {path: "/feedback", name: "Feedback"},
-          {path: "/performance", name: "Performance"},
-          {path: "/settings", name:"Settings"},
+          {path:"/admin", name:"Overview"},
+            { path: "/admin/communication-tools", name: "Communication Tools" },
+          { path: "/admin/doctor-management", name: "Doctor Management" },
+          { path: "/admin/staff-management", name: "Staff Management" },
+          { path: "/admin/training-certification", name: "Training & Certification" },
+          { path: "/admin/payroll-compensation", name: "Payroll & Compensation" },
+          {path: "/admin/document-management", name: "Document Management"},
+          {path: "/admin/leave-management", name: "Leave Management"  },
+          {path: "/admin/feedback", name: "Feedback"},
+          {path: "/admin/performance", name: "Performance"},
+          {path: "/admin/settings", name:"Settings"},
         ].map((item) => (
           <li key={item.path} className="p-4 hover:bg-gray-500">
             <NavLink to={item.path} className="w-full block" activeClassName="bg-blue-600">
@@ -38,10 +38,7 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default AdminSidebar;
 
-   
-      
-       
 
 

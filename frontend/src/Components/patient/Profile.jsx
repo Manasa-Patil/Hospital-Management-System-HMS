@@ -1,6 +1,6 @@
 import React from "react";
-import "../PagesRouter/Dashboard.css";
-import Profileimg from "../assets/profile-icon.png.jpg";
+import "../patient/dashboard.css";
+import Profileimg from "../../assets/profile-icon.png.jpg";
 import "bootstrap/dist/css/bootstrap.css";
 
 

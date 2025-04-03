@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DoctorProfile from "./DoctorProfile";
-import DoctorPhoto from './../assets/doctor.jpg'
+import DoctorPhoto from "./../assets/doctor.jpg";
 
 const LabTests = () => {
   const [patientId, setPatientId] = useState("");
