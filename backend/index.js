@@ -4,6 +4,7 @@ import cors from "cors";
 import userRoutes from './routes/userRoutes.js';
 import doctorRoutes from './routes/doctorRoutes.js';
 import staffRoutes from './routes/staffRoutes.js';
+import doctorAttendanceRoutes from './routes/doctorAttendanceRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -18,6 +19,7 @@ app.use('/uploads', express.static('uploads'));  // Move static file serving abo
 app.use('/api/users', userRoutes);  
 app.use('/api/doctor', doctorRoutes);
 app.use('/api/staff', staffRoutes);
+app.use('/api/doctor/attendanceLeave', doctorAttendanceRoutes);
 
 app.get("/", (req, res) => {
   res.send("API Running");

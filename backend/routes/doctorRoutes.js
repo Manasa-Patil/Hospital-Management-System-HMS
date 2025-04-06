@@ -6,7 +6,7 @@ import { upload } from '../middleware/uploadMiddleware.js';
 
 const router = Router();
 
-router.post('/creatDoctor', verifyToken, upload.single('profilePhoto'), createDoctor);
+router.post('/createDoctor', verifyToken, upload.single('profilePhoto'), createDoctor);
 router.get('/getDoctors/:id', verifyToken, getDoctor);
 router.put('/putDoctors/:id', verifyToken, upload.single('profilePhoto'), updateDoctor);
 

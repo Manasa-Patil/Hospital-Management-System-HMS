@@ -25,6 +25,21 @@ PUT : http://localhost:5000/api/doctor/PutDoctor/1
   - `Content-Type: multipart/form-data`
 
 
+-- Attendence and Leave 
+Content-Type: application/json
+Authorization: Bearer <JWT_TOKEN>
+
+GET(to generate the reports based on the provided date) : http://localhost:5000/api/doctor/attendanceLeave/report?month=4&year=2025
+
+PUT : http://localhost:5000/api/doctor/attendanceLeave/leave/3
+
+POST :  http://localhost:5000/api/doctor/attendanceLeave/leave
 
 
+Doctor Attendance (Check-in / Check-out)
 
+POST : http://localhost:5000/api/doctor/attendanceLeave/checkin
+
+POST: http://localhost:5000/api/doctor/attendanceLeave/checkout
+
+GET : http://localhost:5000/api/doctor/attendanceLeave/:doctorId

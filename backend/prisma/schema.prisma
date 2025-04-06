@@ -25,7 +25,9 @@ model Doctor {
   license        String
   contactInfo    String
   profilePhoto   String?
-  user           User    @relation(fields: [userId], references: [id])
+  user           User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attendances    DoctorAttendance[]
+  leaveRequests  DoctorLeaveRequest[]
 }
 
 model Staff {
@@ -34,7 +36,28 @@ model Staff {
   position    String
   department  String
   contactInfo String
-  user        User     @relation(fields: [userId], references: [id])
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model DoctorAttendance {
+  id        Int      @id @default(autoincrement())
+  doctorId  Int
+  checkIn   DateTime?
+  checkOut  DateTime?
+  date      DateTime @default(now())
+  doctor    Doctor   @relation(fields: [doctorId], references: [userId], onDelete: Cascade)
+}
+
+model DoctorLeaveRequest {
+  id        Int      @id @default(autoincrement())
+  doctorId  Int
+  leaveType String
+  startDate DateTime
+  endDate   DateTime
+  reason    String
+  status    String   @default("pending") // pending, approved, rejected
+  createdAt DateTime @default(now())
+  doctor    Doctor   @relation(fields: [doctorId], references: [userId], onDelete: Cascade)
 }
 
 
