@@ -1,3 +1,8 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './Login';
+import Welcome from './Welcome'; // Import the Welcome page
+import './Login.css';
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DoctorRoutes from "./routes/DoctorRoutes";
@@ -8,6 +13,16 @@ import NotFound from "./pages/PageNotFound";
 
 function App() {
   return (
+    <Router>
+      <div className="app-container">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/welcome" element={<Welcome />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+};
     <BrowserRouter>
       <Routes>
         Doctor Management Routes
