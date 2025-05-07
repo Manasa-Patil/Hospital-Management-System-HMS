@@ -46,7 +46,7 @@ export const createUser = async (req, res) => {
   
   console.log('Received request body:', req.body);
   // Validate role
-  if (!['doctor', 'staff', 'admin'].includes(role)) {
+  if (!['doctor', 'staff', 'admin' , 'patient'].includes(role)) {
     return res.status(400).json({ error: 'Invalid role. Allowed: doctor, staff, admin' });
   }
 
