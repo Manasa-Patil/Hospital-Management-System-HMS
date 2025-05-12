@@ -4,8 +4,6 @@ import Welcome from './Welcome'; // Import the Welcome page
 import './Login.css';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./Login";
-import Welcome from "./Welcome";
 import DoctorRoutes from "./routes/DoctorRoutes";
 import AdminRoutes from "./routes/AdminRoutes";
 import PatientRoutes from "./routes/PatientRoutes";
