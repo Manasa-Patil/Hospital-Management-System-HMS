@@ -1,41 +1,43 @@
-import React from 'react';
-import Login from './Login';
-import Welcome from './Welcome'; // Import the Welcome page
-import './Login.css';
+import React from "react";
+import Login from "./Login";
+import Welcome from "./Welcome";
+import "./Login.css";
+import "./index.css";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import DoctorRoutes from "./routes/DoctorRoutes";
 import AdminRoutes from "./routes/AdminRoutes";
 import PatientRoutes from "./routes/PatientRoutes";
 
+
 import NotFound from "./pages/PageNotFound";
+
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <>
-    {/* <Router>
-      <div className="app-container">
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/welcome" element={<Welcome />} />
-        </Routes>
-      </div>
-    </Router> */}
+    <Routes>
+      {/* Landing route first with a wildcard to match its children */}
 
-    <BrowserRouter>
-      <Routes>
-        Doctor Management Routes
-        <Route path="/doctor/*" element={<DoctorRoutes />} />
-        {/* Admin Routes */}
-        <Route path="/admin/*" element={<AdminRoutes />} />
-        {/* Patient Management Routes */}
-        <Route path="/patient/*" element={<PatientRoutes />} />
-        {/* 404 - Page Not Found */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-    </>
-  )
-};
+      {/* Authentication route */}
+      <Route path="/login" element={<Login />} />
+
+      {/* Welcome route (if applicable)*/}
+      <Route path="/welcome/*" element={<Welcome />} />
+
+      {/* Doctor routes*/}
+      <Route path="/doctor/*" element={<DoctorRoutes />} />
+
+      {/* Admin routes*/}
+      <Route path="/admin/*" element={<AdminRoutes />} />
+
+      {/* Patient routes*/}
+      <Route path="/patient/*" element={<PatientRoutes />} />
+
+      {/* 404 - fallback*/}
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+}
 
 export default App;

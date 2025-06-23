@@ -18,14 +18,15 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/login', {
+      const response = await axios.post('http://localhost:8000/api/users/login', {
         username, // Changed from email to username
         password,
         role,
       });
 
       localStorage.setItem('token', response.data.token);
-      navigate('/welcome');
+      if(role === 'patient')
+      navigate('/patient');
     } catch (error) {
       setError(error.response?.data?.error || 'Login failed');
     }
@@ -51,6 +52,7 @@ const Login = () => {
             <option value="admin">Admin</option>
             <option value="doctor">Doctor</option>
             <option value="staff">Staff</option>
+            <option value="patient">Patient</option>
           </select>
         </div>
 

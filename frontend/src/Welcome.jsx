@@ -1,21 +1,23 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import DoctorsPage from "./Components/Landing/Doctorpage";
+import Landing from "./Components/Landing/heroSection";
+// import './App.css';
+import "./index.css";
 
-const Welcome = () => {
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem('token'); // Remove token on logout
-    navigate('/'); // Redirect to login page
-  };
-
+function Welcome() {
   return (
-    <div className="welcome-container">
-      <h2>Welcome to the Dashboard!</h2>
-      <p>You have successfully logged in.</p>
-      <button onClick={handleLogout} className="logout-button">Logout</button>
-    </div>
+    <Routes>
+      {" "}
+      {/* Use Routes for all your routes */}
+      {/* Landing page route */}
+      <Route path="/" element={<Landing />} />
+      {/* <Route path="/booknow" element={<BookNow />} /> */}
+      {/* Doctors Profile page route */}
+      <Route path="doctors-profile" element={<DoctorsPage />} />
+
+    </Routes>
   );
-};
+}
 
 export default Welcome;

@@ -3,45 +3,83 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  username String  @unique
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  username String   @unique
   password String
   role     String
   doctor   Doctor?
   staff    Staff?
+  patient  Patient?
 }
 
+model Patient {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String  @unique @db.ObjectId
+  firstName    String
+  lastName     String?
+  email        String  @unique
+  DOB          String?
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bloodGroup   String?
+  address      String?
+  profilePhoto String?
+  phone   String?
+  age   String?
+  appointments   Appointment[]
+}
+
+
+model Appointment {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  patientId          String   @db.ObjectId
+  fullName           String
+  email              String
+  address            String?
+  age                String?
+  bloodGroup        String?
+  specialization   String
+    reasonForConsultation String
+   doctorId          String    //@db.ObjectId
+  doctorName        String
+  pastMedicalHistory String?
+  preferredDate     String   // Store as "dd-mm-yyyy"
+  preferredTime     String   // Store as time, e.g. "10:00 AM"
+
+  patient          Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+}
+
+
 model Doctor {
-  id             Int     @id @default(autoincrement())
-  userId         Int     @unique
+  id             String               @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String               @unique @db.ObjectId
   specialization String
   qualifications String
   availability   String
   license        String
   contactInfo    String
   profilePhoto   String?
-  user           User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user           User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   attendances    DoctorAttendance[]
   leaveRequests  DoctorLeaveRequest[]
 }
 
 model Staff {
-  id          Int      @id @default(autoincrement())
-  userId      Int      @unique
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String  @unique @db.ObjectId
   position    String
   department  String
   contactInfo String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model DoctorAttendance {
-  id        Int      @id @default(autoincrement())
-  doctorId  Int
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  doctorId  String @db.ObjectId
   checkIn   DateTime?
   checkOut  DateTime?
   date      DateTime @default(now())
@@ -49,8 +87,8 @@ model DoctorAttendance {
 }
 
 model DoctorLeaveRequest {
-  id        Int      @id @default(autoincrement())
-  doctorId  Int
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  doctorId  String @db.ObjectId
   leaveType String
   startDate DateTime
   endDate   DateTime
@@ -59,6 +97,3 @@ model DoctorLeaveRequest {
   createdAt DateTime @default(now())
   doctor    Doctor   @relation(fields: [doctorId], references: [userId], onDelete: Cascade)
 }
-
-
-

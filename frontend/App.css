@@ -56,7 +56,10 @@ body {
   background: var(--primary);
 }
 
+
+
 /* Layout */
+
 .container {
   display: grid;
   grid-template-columns: var(--sidebar-width) 1fr;
