@@ -14,7 +14,8 @@ model User {
   role     String
   doctor   Doctor?
   staff    Staff?
-  patient  Patient?
+  patient  patient?
+
 }
 
 model Patient {

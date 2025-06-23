@@ -18,7 +18,8 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8000/api/users/login', {
+
+      const response = await axios.post('http://localhost:5000/api/users/login', {
         username, // Changed from email to username
         password,
         role,
@@ -53,6 +54,8 @@ const Login = () => {
             <option value="doctor">Doctor</option>
             <option value="staff">Staff</option>
             <option value="patient">Patient</option>
+           
+
           </select>
         </div>
 

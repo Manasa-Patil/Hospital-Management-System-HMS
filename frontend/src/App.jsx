@@ -9,13 +9,14 @@ import DoctorRoutes from "./routes/DoctorRoutes";
 import AdminRoutes from "./routes/AdminRoutes";
 import PatientRoutes from "./routes/PatientRoutes";
 
-
 import NotFound from "./pages/PageNotFound";
+
 
 import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
+
     <Routes>
       {/* Landing route first with a wildcard to match its children */}
 
@@ -37,7 +38,11 @@ function App() {
       {/* 404 - fallback*/}
       <Route path="*" element={<NotFound />} />
     </Routes>
-  );
-}
+ 
+
+   
+  )
+};
+
 
 export default App;
