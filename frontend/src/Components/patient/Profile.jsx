@@ -1,24 +1,95 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import {  ToastContainer, toast } from "react-toastify";
 import { FaEdit, FaSave } from "react-icons/fa"; // Import icons
 import "./Dashboard.css";
 import Profileimg from "../../assets/profile-icon.png.jpg";
 import MedicalLogo from "../../assets/Medical-logo.jpg";
+import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
 
 function Profile() {
+ 
+  // show a toast when the page first loads
+  useEffect(() => {
+    toast.info("Edit or create your profile.");
+  }, []);
+
+
   const [profile, setProfile] = useState({
-    name: "John Doe",
-    role: "Patient",
-    dob: "1998-05-03",
-    id: "01PT852oC",
-    phone: "598721344xx",
-    address: "City Name",
-    age: "35",
-    bloodGrp: "O+",
+    id: "", // Patient ID, must be numeric
+    firstName: "",
+    lastName: "",
+    email: "",
+    DOB: "",
+    bloodGroup: "",
+    address: "",
+    phone: "",
+    age: "",
   });
+
+  const saveProfile = () => {
+    console.log("pid: ", profile.id);
+    axios
+      .put(
+        `http://localhost:8000/api/patient/684afa77e93e8ce7e247c6b1`,
+        profile
+      )
+      .then((res) => {
+        console.log("Profile updated successfully");
+        // show a popup after a successful update
+      
+        toast.success("Profile updated successfully.");
+        setIsEditing(false);
+      })
+      .catch((err) => {
+        console.error(
+          "Error updating profile:",
+          err.response?.data || err.message || err
+        );
+           toast.error("Error updating profile.");
+      });
+  };
+
+  // const [username, setUsername] = useState("");
+  // const [role, setRole] = useState("");
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/api/users/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+
+        // setUsername(response.data.username);
+        // setRole(response.data.role);
+        console.log("Profile API response: ", response.data);
+
+        // 🔑 Set profile.name using the fetched username
+        setProfile((prev) => ({
+          ...prev,
+          name: response.data.username,
+          role: response.data.role,
+          id: response.data.id || "", // include id if backend sends it
+        }));
+        console.log("ppid: ", response.data.id);
+      } catch (error) {
+        console.error("Error fetching profile data:", error);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
+    e.preventDefault();
+    console.log(e.target.value);
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
 
@@ -26,19 +97,18 @@ function Profile() {
     <div className="container-fluid p-3 vh-100 d-flex flex-column">
       {/* Profile Header */}
       <div className="header d-flex align-items-center mb-4">
-
-      <div className="Hsptl-logo mt-2">
-              <img
-                src={MedicalLogo}
-                alt="Hospital Logo"
-                style={{ height: "70px", objectFit: "contain" }}
-              />
-            </div>
-
-
+        <div className="Hsptl-logo mt-2">
+          <img
+            src={MedicalLogo}
+            alt="Hospital Logo"
+            style={{ height: "70px", objectFit: "contain" }}
+          />
+        </div>
 
         <div className="user-profile d-flex align-items-center">
-          <div className="profile-img me-2">{profile.name.charAt(0)}</div>
+          <div className="profile-img me-2">
+            {profile.name ? profile.name.charAt(0) : ""}
+          </div>
           <div className="user-info">
             <div
               className="user-name"
@@ -67,7 +137,13 @@ function Profile() {
             {/* Small Edit Button on Image */}
             <button
               className="edit-btn"
-              onClick={() => setIsEditing(!isEditing)}
+              onClick={() => {
+                if (isEditing) {
+                  saveProfile(); // save changes to backend
+                } else {
+                  setIsEditing(true);
+                }
+              }}
             >
               {isEditing ? <FaSave /> : <FaEdit />}
             </button>
@@ -89,7 +165,7 @@ function Profile() {
                 <label className="form-label">Date of Birth</label>
                 <input
                   type="date"
-                  name="dob"
+                  name="DOB"
                   value={profile.dob}
                   onChange={handleChange}
                   className="form-control mb-2"
@@ -134,8 +210,8 @@ function Profile() {
                 <label className="form-label">Blood Group</label>
                 <input
                   type="text"
-                  name="bloodGrp"
-                  value={profile.bloodGrp}
+                  name="bloodGroup"
+                  value={profile.bloodGroup}
                   onChange={handleChange}
                   className="form-control mb-2"
                 />
@@ -146,7 +222,7 @@ function Profile() {
                   <strong>Patient Name:</strong> {profile.name}
                 </div>
                 <div className="mb-2">
-                  <strong>Date of Birth:</strong> {profile.dob}
+                  <strong>Date of Birth:</strong> {profile.DOB}
                 </div>
                 <div className="mb-2">
                   <strong>Patient ID:</strong> {profile.id}
@@ -161,14 +237,16 @@ function Profile() {
                   <strong>Age:</strong> {profile.age}
                 </div>
                 <div className="mb-2">
-                  <strong>Blood Group:</strong> {profile.bloodGrp}
+                  <strong>Blood Group:</strong> {profile.bloodGroup}
                 </div>
               </>
             )}
           </div>
         </div>
       </div>
+       <ToastContainer />
     </div>
+   
   );
 }
 

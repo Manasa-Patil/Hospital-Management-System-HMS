@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import PatientSidebar from "../components/patient/PatientSidebar";
 import Profile from "../Components/patient/Profile";
@@ -9,7 +9,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import Dashboard from "../Components/patient/Dashboard.jsx";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "../Components/patient/Dashboard.css";
-import Digital from "../Components/patient/Digital_pres";
 
 
 function PatientRoutes() {
@@ -56,7 +55,6 @@ function PatientRoutes() {
             <Route path="/videoCall" element={<VideoCall />} />
             <Route path="/Billing" element={<Billing />} />
             <Route path="/medicalHist" element={<MedicalHist />} />
-            <Route path="/Prescription" element={<Digital />} />
           </Routes>
         </main>
       </div>
@@ -65,5 +63,3 @@ function PatientRoutes() {
 }
 
 export default PatientRoutes;
-
-

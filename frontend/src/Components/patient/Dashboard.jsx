@@ -11,9 +11,7 @@ import note from "../../assets/upload.png";
 
 function Dashboard() {
   const location = useLocation(); // Get current page URL
-
   return (
-
     <div className="container">
       {/* Sidebar */}
       <div className="sidebar">
@@ -31,8 +29,9 @@ function Dashboard() {
 
           <Link to="/patient/videoCall" style={{ textDecoration: "none", color: "inherit" }}>
             <div className={`nav-item ${location.pathname === "/videoCall" ? "active" : ""}`}>
-              <img className="video-icon" src={videoCamera} alt="Video Call" />
-              <span>Video-Call Appointment</span>
+              {/* <img className="video-icon" src={videoCamera} alt="Video Call" /> */}
+              <img className="pres-icon" src={note} alt="Prescription" />
+              <span>Appointment</span>
             </div>
           </Link>
 
@@ -50,12 +49,13 @@ function Dashboard() {
             </div>
           </Link>
 
-          <Link to="/patient/Prescription" style={{ textDecoration: "none", color: "inherit" }}>
+          {/* <Link to="/patient/Prescription" style={{ textDecoration: "none", color: "inherit" }}>
             <div className={`nav-item ${location.pathname === "/Prescription" ? "active" : ""}`}>
               <img className="pres-icon" src={note} alt="Prescription" />
               <span>Digital Prescription</span>
             </div>
-          </Link>
+          </Link> */}
+
         </div>
 
       </div>
